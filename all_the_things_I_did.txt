@@ -1,0 +1,71 @@
+commit 2037b2e2019f9f2f5d2526a8c0bc6c4b9dbdf5a9
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:30:25 2021 +0100
+
+    Bulid a prgram that can automatically help you to search and read all the reports.
+
+commit bf46e27bdb02d4cd9c466f8dcca7b5a6268cf308
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:29:50 2021 +0100
+
+    Compare the fold change between different types of groups.
+
+commit 33597a510b07fc96a947e79a5195cbb6308e624b
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:29:17 2021 +0100
+
+    Compare the fold change between the groups using different teating times.
+
+commit fc1419adf466cdaa886803ae2fba05f1525690f9
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:28:43 2021 +0100
+
+    Compare the fold change between the groups using different treatments(induced and uninduced).
+
+commit 43d5a0256d5e240643e675c0a30e403e5aeffc4b
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:27:59 2021 +0100
+
+    Count the number of extreme different expressed gene between different groups.
+
+commit 4754b3b0a9a47a57660f920eb79e8e4c1f4e10df
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:26:53 2021 +0100
+
+    Caculate the mean expression level and the fold-change(plus 1 to each counts, and caculate the fc by log2) between groups.
+
+commit 770d8c55dcae6dde5cb1dcfec08448b6828a0c58
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:26:01 2021 +0100
+
+    Generate a report for the samples' quality in summary.
+
+commit 2f0f0f9bc4dd618132ed89040b3f1fcc26abe0a6
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:25:12 2021 +0100
+
+    Use bedtools to counts the number of reads.(compare in gene level)
+
+commit eb6ed06a68c69391383c7dfec2d646c01df874df
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:24:00 2021 +0100
+
+    Use bowtie2 to align swquences, and generate sam files. A pipeline that convert the formats from sam to bam and then sort them.
+
+commit e031eb515c3b0377fa7f926bd94f4beeea171411
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:20:01 2021 +0100
+
+    Built a bowtie index with the gene given.
+
+commit 017dc8c2184a82670103d73f55a4b7b96339f945
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:19:13 2021 +0100
+
+    Use fastqc to generate the report of the quality of each sample.
+
+commit 04db8c89c2f25c72ccaa502d337b1e9cd83049c9
+Author: B200735 <Hello Al>
+Date:   Wed Oct 20 20:18:27 2021 +0100
+
+    Copy all of the data to my directory: B200735.
