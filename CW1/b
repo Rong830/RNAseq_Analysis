@@ -1,0 +1,35 @@
+mkdir B200735
+cp /localdisk/data/BPSM/AY21/fastq/* B200735
+cp  /localdisk/data/BPSM/AY21/Tcongo_genome/* B200735
+cp /localdisk/data/BPSM/AY21/*.bed B200735
+gunzip -r *
+cp /localdisk/data/BPSM/AY21/fastq/* B200735
+#Unzipe all the file in directoty B200735.
+cd B200735
+
+cp /localdisk/data/BPSM/AY21/fastq/100k.fqfiles names.txt
+
+mkdir quality_control 
+sed -i '1d' names.txt 
+#Make a txt file that contains all the samples' describtion, and remove the headline.
+cut -f 6,7 names.txt  | while read file1 file2; do fastqc -t 12 -o quality_control $file1 $file2; done
+#Wrote a pipe line with a loop in it, using the names of samples to analyze every sample.
+#Using fastqc to generate the quality repoerts of all samples, and output all of the result in a directory called quality_control.
+
+bowtie2-build TriTrypDB-46_TcongolenseIL3000_2019_Genome.fasta index
+#Built a bowtie index with the gene given.
+cut -f 1,6,7 names.txt  | while read name file1 file2;do bowtie2 -p 10 -x index -1 $file1 -2 $file2 | samtools sort -O bam -@ 10 > $name.bam; done
+#
+
+cut -f 1 names.txt | while read name; do samtools index $name.bam; bedtools multicov -bams $name.bam -bed TriTrypDB-46_TcongolenseIL3000_2019.bed > $name.reads_count; echo $name been processed; done
+#求reads
+
+mkdir data
+mv *fq data
+mv *gz data
+mv *bam data
+mv *index* data
+mv *bai data
+
+cd ..
+chmod 700 c

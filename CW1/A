@@ -1,0 +1,25 @@
+cd B200735
+
+cut -f2 names.txt | sort | uniq > type
+awk '{print FNR"\t"$1}' type > type_index
+cat type | while read type; do grep $type names.txt > $type.txt; done
+cut -f 1,2 names.txt | while read name type; do cut -f6 $name.reads_count > $name-$type.txt; done
+cat type | while read type; do paste *-$type.txt > $type.txt; done
+cat type | while read type; do awk '{FS="\t"; if(FNR=1)columns=NF}{for(i=1;i<=columns;i++)sum+=$i;}{print sum/columns}{sum=0}' $type.txt > $type.mean.txt; done
+
+while read type1
+do 
+	columns=NF
+	for (i=1;i<=columns;i++)
+		{while read type2
+		do
+			columns2=NF
+			for (v=1;v<=columns2;v++)
+				{if i<v
+				then 
+					paste <(cut -f2 $type1.mean.txt) <(cut -f2 $type2.mean.txt)  | awk '{{print FNR"\t"log($1+1)/log(2)-log($2+1)/log(2)}}' > $type1-$type2-FoldChangeMean.txt
+				fi} 
+		done < type}
+done < type
+
+
