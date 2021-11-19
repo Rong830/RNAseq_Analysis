@@ -1,0 +1,183 @@
+chmod 700 ask
+cd B200735
+echo "***********************************************************************************************"
+echo "Now! You can choose to see the "fold change" data for the "group-wise" comparisons!"
+echo "***********************************************************************************************"
+echo "You want to:"
+echo "1: compare your data between between different treatment"
+echo "2: compare your data between between different experiment time"
+echo "3: compare your data between between different group types"
+echo "4: show the number of extreme diffrerent genes between groups"
+echo "5: show quality reporets summry of your sample"
+echo "6: go through all the files by your own"
+echo "***********************************************************************************************"
+read -p "Please input (1/2/3/4/5/6):" num
+echo "***********************************************************************************************"
+if [ "$num" == "1" ]; then
+    echo "Which is the result report you want to see?"
+    i=0;
+    is_true=false
+    for time in `cat time`; do
+        for type in `cat type`; do
+            for treatment1 in `cat treatment`; do
+                for treatment2 in `cat treatment`; do
+                    if [ $is_true = 'true' ]; then
+                        if [ $time != 0 ]; then
+                            let i++;
+                            echo -e "$i \c"
+                            find Report-$type-$time-$treatment1-$treatment2*
+                        fi
+                    fi
+                    if [ $treatment1 = $treatment2 ]; then
+                        is_true=true
+                    fi
+                done
+                is_true=false
+            done
+        done
+    done
+    read -p "Please input number infront of the file:" o
+    i=0;
+    is_true=false
+    for time in `cat time`; do
+        for type in `cat type`; do
+            for treatment1 in `cat treatment`; do
+                for treatment2 in `cat treatment`; do
+                    if [ $is_true = 'true' ]; then
+                        if [ $time != 0 ]; then
+                            let i++
+                            if [ "$i" = "$o" ]; then
+                                less Report-$type-$time-$treatment1-$treatment2*
+                            fi
+                        fi
+                    fi
+                    if [ $treatment1 = $treatment2 ]; then
+                        is_true=true
+                    fi
+                done
+                is_true=false
+            done
+        done
+    done
+    clear
+fi
+
+#######################################################
+
+
+if [ "$num" == "2" ]; then
+    echo "Which is the result report you want to see?"
+    i=0;
+    is_true=false
+    for type in `cat type`; do
+        for treatment in `cat treatment`; do
+            for time1 in `cat time`; do
+                for time2 in `cat time`;  do
+                    if [ $is_true = 'true' ]; then
+                        if [ $time1 != 0 ] && [ $time2 != 0 ]; then
+                            let i++;
+                            echo -e "$i \c"
+                            find Report-$type-$time1-$time2-$treatment*
+                        fi
+                    fi
+                    if [ $time1 = $time2 ]; then
+                        is_true=true
+                    fi
+                done
+                is_true=false
+            done
+        done
+    done
+    read -p "Please input number infront of the file:" o
+    i=0;
+    is_true=false
+    for type in `cat type`; do
+        for treatment in `cat treatment`; do
+            for time1 in `cat time`; do
+                for time2 in `cat time`;  do
+                    if [ $is_true = 'true' ]; then
+                        if [ $time1 != 0 ] && [ $time2 != 0 ]; then
+                            let i++;
+                            if [ "$i" = "$o" ]; then
+                                less Report-$type-$time1-$time2-$treatment*
+                            fi
+                        fi
+                    fi
+                    if [ $time1 = $time2 ]; then
+                        is_true=true
+                    fi
+                done
+                is_true=false
+            done
+        done
+    done
+    clear
+fi
+#####################################
+if [ "$num" == "3" ]; then
+    echo "Which is the result report you want to see?"
+    i=0;
+    is_true=false
+    for time in `cat time`; do
+        for treatment in `cat treatment`; do
+            for type1 in `cat type`; do
+                for type2 in `cat type`; do
+                    if [ $is_true = 'true' ]; then
+                        if [ $time != 0 ]; then
+                            let i++;
+                            echo -e "$i \c"
+                            find Report-$type1-$type2-$time-$treatment*
+                        fi
+                    fi
+                    if [ $type1 = $type2 ]; then
+                        is_true=true
+                    fi
+                done
+                is_true=false
+            done
+        done
+    done
+    read -p "Please input number infront of the file:" o
+    i=0;
+    is_true=false
+    for time in `cat time`; do
+        for treatment in `cat treatment`; do
+            for type1 in `cat type`; do
+                for type2 in `cat type`; do
+                    if [ $is_true = 'true' ]; then
+                        if [ $time != 0 ]; then
+                            let i++
+                            if [ "$i" = "$o" ]; then
+                                less Report-$type1-$type2-$time-$treatment*
+                            fi
+                        fi
+                    fi
+                    if [ $type1 = $type2 ]; then
+                        is_true=true
+                    fi
+                done
+                is_true=false
+            done
+        done
+    done
+    clear
+fi
+#####################################
+if [ "$num" == "4" ]; then
+    less Report-count.txt
+fi
+#####################################
+if [ "$num" == "5" ]; then
+    less Report-quality.txt
+fi
+#####################################
+if [ "$num" == "6" ]; then
+    echo "All the Report files are in the fold called "B200735", and starts with "Report"."
+    echo "Help yourself and have a nice day!~"
+    echo "Bye Bye~"
+    exit 0
+fi
+#####################################
+clear
+echo "Sorry I don't understand your choice, please choose again."
+sh ask
